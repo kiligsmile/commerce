@@ -29,6 +29,26 @@
     <!--   User queryUserByUsername(@Param("username") String username); -->
     <!--  用于查询的结果集字段和实体类的user属性名不一致，所以不能使用resultType，必须使用resultMap  -->
     <select id="findByUsername" resultMap="UserEntityMap">
-        select count(1) from t_user  where username = #{username}
+        select * from t_user  where username = #{username}
     </select>
+
+    <update id="updatePasswordByUid">
+        update t_user set password = #{password},modified_user = #{modifiedUser},modified_time = #{modifiedTime}
+        where uid = #{uid}
+    </update>
+
+    <select id="findByUid" resultMap="UserEntityMap">
+        select * from t_user where uid=#{uid}
+    </select>
+
+    <update id="updateInfoByUid">
+        update t_user
+        set
+            <if test="phone!=null">phone=#{phone},</if>
+            <if test="email!=null">email=#{email},</if>
+            <if test="gender!=null">gender=#{gender},</if>
+            modified_user=#{modifiedUser},
+            modified_time = #{modifiedTime}
+        where uid = #{uid}
+    </update>
 </mapper>

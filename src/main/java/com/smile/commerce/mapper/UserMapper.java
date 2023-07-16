@@ -2,6 +2,8 @@ package com.smile.commerce.mapper;
 
 import com.smile.commerce.entity.User;
 
+import java.util.Date;
+
 //用户模块持久层接口
 
 public interface UserMapper {
@@ -20,4 +22,11 @@ public interface UserMapper {
      * @Return: 如果找到对应的用户则返回这个用户的数据，如果没有就返回null
     */
     User findByUsername(String username);
+
+    Integer updatePasswordByUid(Integer uid, String password, String modifiedUser, Date modifiedTime);
+
+    User findByUid(Integer uid);
+
+//    更新用户数据信息
+    Integer updateInfoByUid(User user);
 }
