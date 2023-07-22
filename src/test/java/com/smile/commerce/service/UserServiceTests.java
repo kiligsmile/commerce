@@ -65,4 +65,16 @@ public class UserServiceTests {
         }
     }
 
+    @Test
+    public void changeAvatar(){
+        try {
+            Integer uid=27;
+            String username="头像管理员";
+            userService.changeAvatar(uid,"/upload/avatar.png",username);
+            System.out.println("OK");
+        }catch (Exception e){
+            System.out.println(e.getClass().getSimpleName());
+            System.out.println(e.getMessage());
+        }
+    }
 }

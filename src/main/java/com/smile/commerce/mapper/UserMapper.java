@@ -1,6 +1,7 @@
 package com.smile.commerce.mapper;
 
 import com.smile.commerce.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 
@@ -29,4 +30,7 @@ public interface UserMapper {
 
 //    更新用户数据信息
     Integer updateInfoByUid(User user);
+
+//    修改头像
+    Integer updataAvatarByUid(@Param("uid") Integer uid, @Param("avatar") String avatar, @Param("modifiedUser") String modifiedUser, @Param("modifiedTime") Date modifiedTime);
 }

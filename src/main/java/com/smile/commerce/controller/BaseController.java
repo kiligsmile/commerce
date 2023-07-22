@@ -11,7 +11,7 @@ public class BaseController {
     public static final int OK=200;
 
 //    这里的setMessage是给JsonResult的Message赋值，并不是给具体的异常赋值，这里是判断传来的异常是否是具体异常的实例（传给前端的）
-    @ExceptionHandler(ServiceException.class)
+    @ExceptionHandler({ServiceException.class,FileUploadException.class})
     public JsonResult<Void> handleException(Throwable e){
         JsonResult<Void> result=new JsonResult<>(e);
         if(e instanceof UsernameDuplicateException){
@@ -30,6 +30,21 @@ public class BaseController {
         else if(e instanceof InsertException){
             result.setState(5001);
             result.setMessage("更新数据时产生未知异常");
+        } else if (e instanceof FileEmptyException) {
+            result.setState(6000);
+            result.setMessage("上传的文件为空");
+        } else if (e instanceof FileSizeException) {
+            result.setState(6001);
+            result.setMessage("上传的文件的大小超出了限制值");
+        } else if (e instanceof FileTypeException) {
+            result.setState(6002);
+            result.setMessage("上传的文件类型超出了限制");
+        } else if (e instanceof FileStateException) {
+            result.setState(6003);
+            result.setMessage("上传的文件状态异常");
+        } else if (e instanceof FileUploadIOException) {
+            result.setState(6004);
+            result.setMessage("上传文件时读写异常");
         }
         return result;
     }

@@ -121,4 +121,20 @@ public class UserServiceImpl implements IUserService {
         user.setGender(result.getGender());
         return user;
     }
+
+    @Override
+    public void changeAvatar(Integer uid, String avatar,String username) {
+        User result = userMapper.findByUid(uid);
+        if(result==null){
+            throw new UserNotFoundException("用户数据不存在");
+        }
+        if(result.getIsDelete().equals(1)){
+            throw new UserNotFoundException("用户数据不存在");
+        }
+        Date now = new Date();
+        Integer rows = userMapper.updataAvatarByUid(uid, avatar, username, now);
+        if(rows!=1){
+            throw new UpdateException("更新用户数据时出现未知错误，请联系系统管理员");
+        }
+    }
 }
