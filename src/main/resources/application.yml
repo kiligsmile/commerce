@@ -16,3 +16,6 @@ mybatis:
   type-aliases-package: com.smile.commerce.entity
   mapper-locations: classpath:mapper/*.xml
 
+user:
+  address:
+    max-count: 20

@@ -45,6 +45,8 @@ public class BaseController {
         } else if (e instanceof FileUploadIOException) {
             result.setState(6004);
             result.setMessage("上传文件时读写异常");
+        } else if (e instanceof AddressCountLimitException) {
+            result.setState(4003);
         }
         return result;
     }
